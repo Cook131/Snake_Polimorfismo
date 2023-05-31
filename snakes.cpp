@@ -57,13 +57,6 @@ int main() {
     cin >> mode;
     cout << "Comienza el juego" << endl;
 
-    
-    
-    Snake s;
-    cout << s.getType() << endl;
 
-    Player p;
-    p.setName("Jose");
-    cout << p.getName() << endl;
     return 0;
 }

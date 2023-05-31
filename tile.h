@@ -12,11 +12,13 @@ class Tile {
         Tile(const char &type, const int &move) : type(type), move(move) {} // Constructor with const data initialization
         Tile(const Tile& other) : type(other.type), move(other.move) {} //Copy constructor
 
-        virtual ~Tile() {} //Destructor
+        ~Tile() {} //Destructor
 
         char getType() const { return type; } //Getter
         int getMove() const { return move; } //Getter
-        virtual void setType(const char &type) { this -> type = type; } //Setter
-        virtual void setMove(const int &move) { this -> move = move; } //Setter
-        virtual void printTile() { cout << "Esta casilla es: " << getType() << " ;y mueve " << getMove() << " al jugador." << "\n"; }
+        void setType(const char &type) { this -> type = type; } //Setter
+        void setMove(const int &move) { this -> move = move; } //Setter
+        //Print tile attributes
+        void printTile() { cout << "Esta casilla es: " << getType() << " ;y mueve " << getMove() << " al jugador." << "\n"; }
+    
 };
