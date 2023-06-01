@@ -22,6 +22,7 @@ class Board
 
     void setSize(int sizeBoard) { this -> sizeBoard = sizeBoard; }
     int getSize(){ return sizeBoard; }
+    vector<Tile*> getBoard(){ return board; }
     void setRandomTiles(int, int, Snake, Ladder);
     void printBoard () const;
 
@@ -29,7 +30,7 @@ class Board
         default_random_engine randomEngine;
         int randomPositions()
         {
-            uniform_int_distribution<int> distribution(1, getSize() - 1);
+            uniform_int_distribution<int> distribution(3, getSize() - 3);
             return distribution(randomEngine);
         }
 };
@@ -54,6 +55,7 @@ void Board::setRandomTiles(int numSnakes, int numLadders,Snake s, Ladder l)
         while (board[position] -> getType() != 'N') 
         {
             position = randomPositions();
+            cout <<"pone serpientes" << endl;
         }
 
         board[position] = new Snake(s);
@@ -67,6 +69,8 @@ void Board::setRandomTiles(int numSnakes, int numLadders,Snake s, Ladder l)
         while (board[position] -> getType() != 'N') 
         {
             position = randomPositions();
+            cout <<"pone escaleras" << endl;
+
         }
 
         board[position] = new Ladder(l);

@@ -8,14 +8,14 @@ using namespace std;
 
 class Player : public Person
 {
-    int posPlayer;
+    int posPlayer=0;
     public:
-        Player() : Person () {}
-        Player(const string &name) : Person(name) {}
+        Player() : Person(), posPlayer() {};
+        Player(const string &name) : Person(name), posPlayer() {};
         ~Player() {}
         
         void setPos(int pos, int dice){ posPlayer = pos + dice; }  //sets new position based on past position and dice adding
-        int getPos(); //gets 
+        int getPos(){ return posPlayer; } //gets 
         void printPlayerInfo(); //prints at end of turn the data collected by individual
 };
 
