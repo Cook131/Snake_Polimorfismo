@@ -7,7 +7,7 @@
 #include "player.h"
 
 int numPlayers, Smove, Lmove, maxTurns, numLadders, numSnakes, sizeBoard;
-char gamemode;
+char gamemode = 'X';
 Dice dice;
 
 using namespace std;
@@ -29,31 +29,31 @@ int main() {
     cout <<"Decida el premio por escalera: " << endl;
     cin >> Lmove;
 
-    Ladder l;
-    l.setMove(Lmove);
-
     cout << "Ingrese el numero de serpientes que desea en el juego: " << endl;
     cin >> numSnakes;
     cout <<"Decida el castigo por serpiente: " << endl;
     cin >> Smove;
-    Snake s;
-    s.setMove(Smove);
 
     Board b(sizeBoard);
-    b.printBoard();
-    b.setRandomTiles(numSnakes, numLadders, s, l);
+    b.setRandomTiles(numSnakes, numLadders, Smove, Lmove);
+    cout << "TABLERO: " << endl;
     b.printBoard();
 
+
     vector<Player> players;
-    int i=1;
-    for (auto iterador: players)
+    int i=0;
+
+    while (i < numPlayers)
     {
         string name;
-        cout << "Ingrese el nombre del jugador " << i << endl;
+        cout << "Nombre jugador " << i << ": " << endl;
         cin >> name;
         players.push_back(Player(name));
         i++;
     }
+
+
+
 
     while(gamemode!='A' && gamemode!='M')
     {
@@ -67,10 +67,10 @@ int main() {
     {
         for (int i = 0; i < maxTurns; i++)
         {
-            for (auto iterador: players)
+            for (auto& iterador: players)
             {
                 cout << "Turno de " << iterador.getName() << endl;
-                cout << "Presiona enter para lanzar el dado" << endl;
+                cout << "Presiona doble enter para lanzar el dado" << endl;
                 cin.ignore();
                 cin.get();
                 int diceValue = dice.roll();
@@ -91,26 +91,26 @@ int main() {
         {
             for (auto iterador: players)
             {
-                cout << "Turno de " << iterador.getName() << endl;
-                int diceValue = dice.roll();
-                cout << "El dado cayo en " << diceValue << endl;
-                iterador.setPos(iterador.getPos(),diceValue);
+                    cout << "Turno de " << iterador.getName() << endl;
+                    int diceValue = dice.roll();
+                    cout << "El dado cayo en " << diceValue << endl;
+                    iterador.setPos(iterador.getPos(),diceValue);
 
-                cout << "IMPORTANTE" << iterador.getPos() << endl;
+                    cout << "IMPORTANTE" << iterador.getPos() << endl;
 
-                if(b.getBoard()[iterador.getPos()]->getType()=='S' || b.getBoard()[iterador.getPos()]->getType()=='L')
+                    if(b.getBoard()[iterador.getPos()]->getType()=='S' || b.getBoard()[iterador.getPos()]->getType()=='L')
 
-                {
-                   cout << "Caiste en :" << b.getBoard()[iterador.getPos()]->getType() << "te mueves acorde" << endl;
-                   iterador.setPos(iterador.getPos(),b.getBoard()[iterador.getPos()]->getMove());
-                }
+                    {
+                    cout << "Caiste en: " << b.getBoard()[iterador.getPos()]->getType() << "te mueves acorde" << endl;
+                    iterador.setPos(iterador.getPos(),b.getBoard()[iterador.getPos()]->getMove());
+                    }
 
-                cout << "Ahora estas en la casilla " << iterador.getPos() << endl;
-                if (iterador.getPos() >= sizeBoard)
-                {
-                    cout << "Felicidades " << iterador.getName() << " has ganado" << endl;
-                    return 0;
-                }
+                    cout << "Ahora estas en la casilla " << iterador.getPos() << endl;
+                    if (iterador.getPos() >= sizeBoard)
+                    {
+                        cout << "Felicidades " << iterador.getName() << " has ganado" << endl;
+                        return 0;
+                    }
             }
         }
     }

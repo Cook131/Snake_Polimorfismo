@@ -27,7 +27,7 @@ class Board
     void setSize(int sizeBoard) { this -> sizeBoard = sizeBoard; }
     int getSize(){ return sizeBoard; }
     vector<Tile*> getBoard(){ return board; }
-    void setRandomTiles(int, int, Snake, Ladder);
+    void setRandomTiles(int, int, int, int);
     void printBoard () const;
 
     private:
@@ -43,13 +43,13 @@ Board::Board(const int &sizeBoard) : sizeBoard(sizeBoard), board(sizeBoard)
 {
     for (int i = 0; i < sizeBoard; i++)
     {
-        board.push_back(new Tile());
+        board[i] = new Tile();
     }
     
 }
 
 
-void Board::setRandomTiles(int numSnakes, int numLadders,Snake s, Ladder l)
+void Board::setRandomTiles(int numSnakes, int numLadders, int Smove, int Lmove )
 {
     for (int i = 0; i < numSnakes; ++i) 
     {
@@ -62,7 +62,8 @@ void Board::setRandomTiles(int numSnakes, int numLadders,Snake s, Ladder l)
             cout <<"pone serpientes" << endl;
         }
 
-        board[position] = new Snake(s);
+        board[position] = new Snake();
+        board[position] -> setMove(Smove);
     }
 
     for (int i = 0; i < numLadders; ++i) 
@@ -77,7 +78,8 @@ void Board::setRandomTiles(int numSnakes, int numLadders,Snake s, Ladder l)
 
         }
 
-        board[position] = new Ladder(l);
+        board[position] = new Ladder();
+        board[position] -> setMove(Lmove);
     }
 }
 
