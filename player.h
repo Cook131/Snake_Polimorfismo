@@ -19,7 +19,7 @@ class Player : public Person
         ~Player() {} //Destructor
         
         void setPos(int pos, int dice){ posPlayer = pos + dice; }  //sets new position based on past position and dice adding
-        int getPos(); //gets 
+        int getPos(){ return posPlayer; } //gets 
         void printPlayerInfo(); //prints at end of turn the data collected by individual
 };
 
