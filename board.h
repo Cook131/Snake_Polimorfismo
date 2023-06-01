@@ -59,7 +59,6 @@ void Board::setRandomTiles(int numSnakes, int numLadders, int Smove, int Lmove )
         while (board[position] -> getType() != 'N') 
         {
             position = randomPositions();
-            cout <<"pone serpientes" << endl;
         }
 
         board[position] = new Snake();
@@ -74,8 +73,6 @@ void Board::setRandomTiles(int numSnakes, int numLadders, int Smove, int Lmove )
         while (board[position] -> getType() != 'N') 
         {
             position = randomPositions();
-            cout <<"pone escaleras" << endl;
-
         }
 
         board[position] = new Ladder();
