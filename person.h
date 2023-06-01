@@ -18,6 +18,6 @@ class Person {
         Person(const Person &otro) : name(otro.name) {} //Copy constructor which will be inherited
         ~Person(){} //Destructor
 
-        string getName() const { return name; }
-        void setName(const string& name) { this -> name = name; }
+        string getName() const { return name; } //Getter of player's name
+        void setName(const string& name) { this -> name = name; } //Setter of player's name
 };

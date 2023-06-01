@@ -12,5 +12,5 @@ class Snake : public Tile {
         Snake () : Tile('S',-3) {} // Constructor to data initialization                                                             
         Snake(const char &type, const int &move) : Tile(type,move) {} // Constructor with const data initialization
         int Slide() { return getMove(); } //Snake movement
-        ~Snake() {}
+        ~Snake() {} //Destructor
 };

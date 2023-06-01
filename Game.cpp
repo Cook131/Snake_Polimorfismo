@@ -1,3 +1,7 @@
+// --- GAME CLASS AND MAIN PROGRAM---
+// Jorge Luis Nájera Espinosa - A01424106
+// Andrea Carolina Figueroa Orihuela - A01424250
+
 #include <iostream>
 #include <string>
 #include "board.h"
@@ -8,16 +12,20 @@
 
 
 using namespace std;
+
+//Parametric variables
 int numPlayers, Smove, Lmove, maxTurns, numLadders, numSnakes, sizeBoard;
 char gamemode;
+
+//Create the dice
 Dice dice;
 
 //Game class
 class Game 
 {
     public:
-        Game(){}
-        ~Game(){}
+        Game(){}//Empty constructor
+        ~Game(){}//Destructor
         //Method to start game, with all the logic process
         int start()
         {
@@ -67,20 +75,23 @@ class Game
             }
             cin.ignore();
 
+            //Game starts in interface
             cout << "\n-------------------Comienza el juego--------------------------\n" << endl;
 
-
+            //Manual mode
             if(gamemode=='M')
             {
+                //Turn loop
                 for (int i = 0; i < maxTurns; i++)
                 {
+                    //Player loop
                     for (auto& iterador: players)
                     {
                         cout << "----------------------------------------" << endl;
                         cout << "Turno de " << iterador.getName() << endl;
                         cout << "Presiona enter para lanzar el dado" << endl;
                         cin.get();
-                        int diceValue = dice.roll();
+                        int diceValue = dice.roll();//get integer from dice
                         cout << "El dado cayo en " << diceValue << endl;
                         iterador.setPos(iterador.getPos(), diceValue); //Set the position according to the dice
                         if (iterador.getPos() >= sizeBoard) {iterador.setPos(sizeBoard, 0);}
@@ -93,7 +104,6 @@ class Game
                         }
                         if(b.getBoard()[iterador.getPos()]->getType()=='S' || b.getBoard()[iterador.getPos()]->getType()=='L') //Verify the tile
                         {
-                            cout << "IMPORTANTE" << endl;
                             cout << "Caiste en: " << b.getBoard()[iterador.getPos()]->getType() << "    te mueves acorde" << endl;
                             iterador.setPos(iterador.getPos(),b.getBoard()[iterador.getPos()]->getMove()); //Give the punishment/reward
                             cout << "Ahora estas en la casilla " << iterador.getPos() << endl;
@@ -103,6 +113,7 @@ class Game
                 }
                 cout << "Turnos maximos" << "\nGAME OVER" << endl;
             }
+            //Automatic mode
             else if(gamemode=='A')
             {
                 for (int i = 0; i < maxTurns; i++)
@@ -111,6 +122,7 @@ class Game
                     {
                             cout << "----------------------------------------" << endl;
                             cout << "Turno de " << iterador.getName() << endl;
+                            //no button for dice roll
                             int diceValue = dice.roll();
                             cout << "El dado cayo en " << diceValue << endl;
                             iterador.setPos(iterador.getPos(),diceValue); //Set the position according to the dice
@@ -124,7 +136,7 @@ class Game
                             }
                             if(b.getBoard()[iterador.getPos()]->getType()=='S' || b.getBoard()[iterador.getPos()]->getType()=='L')
                             {
-                                cout << "IMPORTANTE" << endl;
+
                                 cout << "Caiste en: " << b.getBoard()[iterador.getPos()]->getType() << "    te mueves acorde" << endl; 
                                 iterador.setPos(iterador.getPos(),b.getBoard()[iterador.getPos()]->getMove()); //Give the punishment/reward
                                 cout << "Ahora estas en la casilla " << iterador.getPos() << endl;
@@ -132,11 +144,13 @@ class Game
                             cout << "----------------------------------------" << endl;
                     }
                 }
+                //game over if max turns
                 cout << "Turnos maximos" << "\nGAME OVER" << endl;
             }
         }
 };
 
+//Main program
 int main() {
     Game g;
     g.start();
