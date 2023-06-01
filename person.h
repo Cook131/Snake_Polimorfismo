@@ -1,3 +1,7 @@
+// --- PERSON CLASS  ---
+// Jorge Luis Nájera Espinosa - A01424106
+// Andrea Carolina Figueroa Orihuela - A01424250
+
 #include <iostream>
 #include <string>
 using namespace std;
@@ -9,10 +13,10 @@ class Person {
         string name;
     
     public:
-        Person() {}
-        Person(const string& name) : name(name) {}
-        Person(const Person &otro) : name(otro.name) {}
-        ~Person(){}
+        Person() {} //Empty constructor
+        Person(const string& name) : name(name) {} //Constructor with name as input which will be inherited
+        Person(const Person &otro) : name(otro.name) {} //Copy constructor which will be inherited
+        ~Person(){} //Destructor
 
         string getName() const { return name; }
         void setName(const string& name) { this -> name = name; }

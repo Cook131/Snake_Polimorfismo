@@ -1,3 +1,7 @@
+// --- TILE CLASS ---
+// Jorge Luis Nájera Espinosa - A01424106
+// Andrea Carolina Figueroa Orihuela - A01424250
+
 #include <iostream>
 using namespace std;
 
