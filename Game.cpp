@@ -27,8 +27,8 @@ class Game
         Board b;
         vector<Player> players;
         Dice dice;
-        Turn ta(b, turnnum, diceValue);
-        Turn tm(b, turnnum, diceValue);
+        Turn ta;
+        Turn tm;
     public:
         Game(){}//Empty constructor
         ~Game(){}//Destructor
@@ -109,7 +109,7 @@ class Game
                         }
                         if (iterador.getPos() >= sizeBoard) {iterador.setPos(sizeBoard, 0);}
 
-                        &tm.reTurno(b,iterador,turno,diceValue);//edit printable turn object
+                        tm.reTurno(b,iterador,turno,diceValue);//edit printable turn object
                         cout << "Turno: " << turno << endl;
                         
                         if (iterador.getPos() >= sizeBoard) //Verify if it wins
@@ -143,7 +143,7 @@ class Game
                         }
                         if (iterador.getPos() >= sizeBoard) {iterador.setPos(sizeBoard, 0);}
 
-                        &ta.reTurno(b,iterador,turno,diceValue);//edit printable turn object
+                        ta.reTurno(b,iterador,turno,diceValue);//edit printable turn object
                         cout << "Turno: " << turno << endl;//print said object
                         
                         if (iterador.getPos() >= sizeBoard) //Verify if it wins

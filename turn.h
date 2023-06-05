@@ -26,14 +26,14 @@ class Turn
         int diceValue;
 
     public:
-        Turn(Board b,int turnnum,int diceValue){}//Empty constructor
+        Turn(){}//Empty constructor
         string getNombre(){return iterador.getName();}//Get the name of the player
         int getPos(){return iterador.getPos();}//Get the position of the player
         char getType(){return b.getBoard()[iterador.getPos()]->getType();}//Get the type of the tile
         int getMove(){return b.getBoard()[iterador.getPos()]->getMove();}//Get the movement of the tile
         int getTurno(){return turnnum;}//Get the turn
         int getDiceValue(){return diceValue;}//Get the dice value
-        void setPlayer(Player iterador){this->iterador=iterador;}
+
 
         void reTurno(Board &b,Player &iterador,int &turnnum,int &diceValue);//Change the turn values
 
