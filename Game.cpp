@@ -13,16 +13,19 @@
 
 using namespace std;
 
-//Parametric variables
-int numPlayers, Smove, Lmove, maxTurns, numLadders, numSnakes, sizeBoard;
-char gamemode;
-
-//Create the dice
-Dice dice;
 
 //Game class
 class Game 
 {
+    private:
+        //Parametric variables
+        int numPlayers, Smove, Lmove, maxTurns, numLadders, numSnakes, sizeBoard;
+        char gamemode;
+
+        //Create the game objects
+        Board b;
+        vector<Player> players;
+        Dice dice;
     public:
         Game(){}//Empty constructor
         ~Game(){}//Destructor
@@ -50,13 +53,17 @@ class Game
             cin >> Smove;
 
             //Create the board according to the paramaters
-            Board b(sizeBoard);
+            
+            b.setSize(sizeBoard);
+            b.constructBoard(sizeBoard);
+            //Board b(sizeBoard); <-si funciona, pero ocupamos construirlo desde antes, no aca abajo
+
+
             b.setRandomTiles(numSnakes, numLadders, -1*Smove, Lmove);
             cout << "TABLERO: " << endl;
             b.printBoard();
 
 
-            vector<Player> players;
             int i=0;
             //Create the Players vector accordin to the number entered
             while (i < numPlayers)
@@ -93,7 +100,7 @@ class Game
                         cin.get();
                         int diceValue = dice.roll();//get integer from dice
                         cout << "El dado cayo en " << diceValue << endl;
-                        iterador.setPos(iterador.getPos(), diceValue); //Set the position according to the dice
+                        iterador+diceValue; //Set the position according to the dice
                         if (iterador.getPos() >= sizeBoard) {iterador.setPos(sizeBoard, 0);}
                         cout << "Ahora estas en la casilla " << iterador.getPos() << endl;
                         if (iterador.getPos() >= sizeBoard) //Verify if it wins
@@ -105,7 +112,7 @@ class Game
                         if(b.getBoard()[iterador.getPos()]->getType()=='S' || b.getBoard()[iterador.getPos()]->getType()=='L') //Verify the tile
                         {
                             cout << "Caiste en: " << b.getBoard()[iterador.getPos()]->getType() << "    te mueves acorde" << endl;
-                            iterador.setPos(iterador.getPos(),b.getBoard()[iterador.getPos()]->getMove()); //Give the punishment/reward
+                            iterador+(b.getBoard()[iterador.getPos()]->getMove()); //Give the punishment/reward
                             cout << "Ahora estas en la casilla " << iterador.getPos() << endl;
                         }
                         cout << "----------------------------------------" << endl;
@@ -120,34 +127,33 @@ class Game
                 {
                     for (auto& iterador: players)
                     {
-                            cout << "----------------------------------------" << endl;
-                            cout << "Turno de " << iterador.getName() << endl;
-                            //no button for dice roll
-                            int diceValue = dice.roll();
-                            cout << "El dado cayo en " << diceValue << endl;
-                            iterador.setPos(iterador.getPos(),diceValue); //Set the position according to the dice
-                            if (iterador.getPos() >= sizeBoard) {iterador.setPos(sizeBoard, 0);}
+                        cout << "----------------------------------------" << endl;
+                        cout << "Turno de " << iterador.getName() << endl;
+                        //no button for dice roll
+                        int diceValue = dice.roll();
+                        cout << "El dado cayo en " << diceValue << endl;
+                        iterador.setPos(iterador.getPos(),diceValue); //Set the position according to the dice
+                        if (iterador.getPos() >= sizeBoard) {iterador.setPos(sizeBoard, 0);}
                             cout << "Ahora estas en la casilla " << iterador.getPos() << endl;
-                            if (iterador.getPos() >= sizeBoard) //Verify if it wins
-                            {
-                                cout << "Felicidades " << iterador.getName() << " has ganado" << endl;
-                                cout << "\nGAME OVER" << endl;
-                                return 0;
-                            }
-                            if(b.getBoard()[iterador.getPos()]->getType()=='S' || b.getBoard()[iterador.getPos()]->getType()=='L')
-                            {
-
-                                cout << "Caiste en: " << b.getBoard()[iterador.getPos()]->getType() << "    te mueves acorde" << endl; 
-                                iterador.setPos(iterador.getPos(),b.getBoard()[iterador.getPos()]->getMove()); //Give the punishment/reward
-                                cout << "Ahora estas en la casilla " << iterador.getPos() << endl;
-                            }
-                            cout << "----------------------------------------" << endl;
+                        if (iterador.getPos() >= sizeBoard) //Verify if it wins
+                        {
+                            cout << "Felicidades " << iterador.getName() << " has ganado" << endl;
+                            cout << "\nGAME OVER" << endl;
+                            return 0;
+                        }
+                        if(b.getBoard()[iterador.getPos()]->getType()=='S' || b.getBoard()[iterador.getPos()]->getType()=='L') //Verify the tile
+                        {
+                            cout << "Caiste en: " << b.getBoard()[iterador.getPos()]->getType() << "    te mueves acorde" << endl;
+                            iterador+(b.getBoard()[iterador.getPos()]->getMove()); //Give the punishment/reward
+                            cout << "Ahora estas en la casilla " << iterador.getPos() << endl;
+                        }
+                        cout << "----------------------------------------" << endl;
                     }
                 }
                 //game over if max turns
                 cout << "Turnos maximos" << "\nGAME OVER" << endl;
             }
-        }
+        return 0;}
 };
 
 //Main program

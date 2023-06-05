@@ -19,6 +19,7 @@ class Board
     vector<Tile*> board;
 
     public:
+        Board() : sizeBoard(0) {}
         Board(const int &sizeBoard);
         Board(const vector<Tile*> &t) : sizeBoard(t.size()), board(t), randomEngine(random_device{}()) {}
         Board(const Board &other) : sizeBoard(other.sizeBoard), board(other.board), randomEngine(random_device{}()){}
@@ -27,6 +28,7 @@ class Board
     void setSize(int sizeBoard) { this -> sizeBoard = sizeBoard; }
     int getSize(){ return sizeBoard; }
     vector<Tile*> getBoard(){ return board; }
+    void constructBoard(int);
     void setRandomTiles(int, int, int, int);
     void printBoard () const;
 
@@ -48,6 +50,13 @@ Board::Board(const int &sizeBoard) : sizeBoard(sizeBoard), board(sizeBoard)
     
 }
 
+void Board::constructBoard(int sizeBoard)
+{
+    for (int i = 0; i < sizeBoard; i++)
+    {
+        board[i] = new Tile();
+    }
+}
 
 void Board::setRandomTiles(int numSnakes, int numLadders, int Smove, int Lmove )
 {
