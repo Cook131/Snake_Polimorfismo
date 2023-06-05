@@ -28,7 +28,6 @@ class Board
     void setSize(int sizeBoard);
     int getSize(){ return sizeBoard; }
     vector<Tile*> getBoard(){ return board; }
-    void constructBoard(int);
     void setRandomTiles(int, int, int, int);
     void printBoard () const;
 
@@ -50,13 +49,6 @@ Board::Board(const int &sizeBoard) : sizeBoard(sizeBoard), board(sizeBoard)
     
 }
 
-void Board::constructBoard(int sizeBoard)
-{
-    for (int i = 0; i < sizeBoard; i++)
-    {
-        board[i] = new Tile();
-    }
-}
 
 void Board::setSize(int sizeBoard)
 {

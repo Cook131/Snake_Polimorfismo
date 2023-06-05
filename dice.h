@@ -6,6 +6,8 @@
 #include <cstdlib>
 using namespace std;
 
+#pragma once
+
 class Dice {
     const int faces; 
 

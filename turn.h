@@ -2,9 +2,6 @@
 // Jorge Luis Nájera Espinosa - A01424106
 // Andrea Carolina Figueroa Orihuela - A01424250
 
-
-//a terminar, por favor
-
 #include <iostream>
 #include <string>
 #include "board.h"
@@ -12,7 +9,6 @@
 #include "snake.h"
 #include "ladder.h"
 #include "player.h"
-#include "Game.cpp"
 
 
 using namespace std;
@@ -24,36 +20,36 @@ class Turn
     private:        
         //Create the game objects
         Board b;
-        vector<Player> players;
+        Player iterador;
         Dice dice;
+        int turnnum;
+        int diceValue;
 
     public:
-        Turn(){}//Empty constructor
-        ~Turn(){}//Destructor
+        Turn(Board b,int turnnum,int diceValue){}//Empty constructor
+        string getNombre(){return iterador.getName();}//Get the name of the player
+        int getPos(){return iterador.getPos();}//Get the position of the player
+        char getType(){return b.getBoard()[iterador.getPos()]->getType();}//Get the type of the tile
+        int getMove(){return b.getBoard()[iterador.getPos()]->getMove();}//Get the movement of the tile
+        int getTurno(){return turnnum;}//Get the turn
+        int getDiceValue(){return diceValue;}//Get the dice value
+        void setPlayer(Player iterador){this->iterador=iterador;}
 
+        void reTurno(Board &b,Player &iterador,int &turnnum,int &diceValue);//Change the turn values
+
+        ~Turn(){}//Destructor
 };
 
-ostream & operator<<(ostream &out, Game &g){
-    cout << "----------------------------------------" << endl;
-    cout << "Turno de " << iterador.getName() << endl;
-    //no button for dice roll
-    int diceValue = dice.roll();
-    cout << "El dado cayo en " << diceValue << endl;
-    iterador.setPos(iterador.getPos(),diceValue); //Set the position according to the dice
-    if (iterador.getPos() >= sizeBoard) {iterador.setPos(sizeBoard, 0);}
-    cout << "Ahora estas en la casilla " << iterador.getPos() << endl;
-    if (iterador.getPos() >= sizeBoard) //Verify if it wins
-    {
-        cout << "Felicidades " << iterador.getName() << " has ganado" << endl;
-        cout << "\nGAME OVER" << endl;
-        return 0;
-    }
-    if(b.getBoard()[iterador.getPos()]->getType()=='S' || b.getBoard()[iterador.getPos()]->getType()=='L')
-    {
+ostream & operator<<(ostream &out, Turn &t) //print overload
+{   
+    cout<< t.getTurno() << " " << t.getNombre() << " " << t.getPos() << " " << t.getType() << " " << t.getMove() << endl;
+    return out;
+}
 
-        cout << "Caiste en: " << b.getBoard()[iterador.getPos()]->getType() << "    te mueves acorde" << endl; 
-        iterador.setPos(iterador.getPos(),b.getBoard()[iterador.getPos()]->getMove()); //Give the punishment/reward
-        cout << "Ahora estas en la casilla " << iterador.getPos() << endl;
-    }
-    cout << "----------------------------------------" << endl;
+void Turn::reTurno(Board &b,Player &iterador,int &turnnum,int &diceValue)
+{
+    this->b=b;
+    this->iterador=iterador;
+    this->turnnum=turnnum;
+    this->diceValue=diceValue;
 }

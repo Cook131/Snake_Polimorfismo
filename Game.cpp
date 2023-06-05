@@ -9,6 +9,7 @@
 #include "snake.h"
 #include "ladder.h"
 #include "player.h"
+#include "turn.h"
 
 
 using namespace std;
@@ -26,6 +27,8 @@ class Game
         Board b;
         vector<Player> players;
         Dice dice;
+        Turn ta(b, turnnum, diceValue);
+        Turn tm(b, turnnum, diceValue);
     public:
         Game(){}//Empty constructor
         ~Game(){}//Destructor
@@ -55,9 +58,6 @@ class Game
             //Create the board according to the paramaters
             
             b.setSize(sizeBoard);
-            b.constructBoard(sizeBoard);
-            //Board b(sizeBoard); <-si funciona, pero ocupamos construirlo desde antes, no aca abajo
-
 
             b.setRandomTiles(numSnakes, numLadders, -1*Smove, Lmove);
             cout << "TABLERO: " << endl;
@@ -93,27 +93,30 @@ class Game
                 {
                     //Player loop
                     for (auto& iterador: players)
-                    {
+                    {   
+                        int turno=i; //get turn number
+                        int diceValue=dice.roll(); //get integer from dice
+                        
                         cout << "----------------------------------------" << endl;
-                        cout << "Turno de " << iterador.getName() << endl;
                         cout << "Presiona enter para lanzar el dado" << endl;
                         cin.get();
-                        int diceValue = dice.roll();//get integer from dice
-                        cout << "El dado cayo en " << diceValue << endl;
+
                         iterador+diceValue; //Set the position according to the dice
-                        if (iterador.getPos() >= sizeBoard) {iterador.setPos(sizeBoard, 0);}
-                        cout << "Ahora estas en la casilla " << iterador.getPos() << endl;
-                        if (iterador.getPos() >= sizeBoard) //Verify if it wins
-                        {
-                            cout << "Felicidades " << iterador.getName() << " has ganado" << endl;
-                            cout << "\nGAME OVER" << endl;
-                            return 0;
-                        }
+
                         if(b.getBoard()[iterador.getPos()]->getType()=='S' || b.getBoard()[iterador.getPos()]->getType()=='L') //Verify the tile
                         {
-                            cout << "Caiste en: " << b.getBoard()[iterador.getPos()]->getType() << "    te mueves acorde" << endl;
                             iterador+(b.getBoard()[iterador.getPos()]->getMove()); //Give the punishment/reward
-                            cout << "Ahora estas en la casilla " << iterador.getPos() << endl;
+                        }
+                        if (iterador.getPos() >= sizeBoard) {iterador.setPos(sizeBoard, 0);}
+
+                        &tm.reTurno(b,iterador,turno,diceValue);//edit printable turn object
+                        cout << "Turno: " << turno << endl;
+                        
+                        if (iterador.getPos() >= sizeBoard) //Verify if it wins
+                        {
+                            cout << "Player " << iterador.getName() << " is the winner" << endl;
+                            cout << "\nGAME OVER" << endl;
+                            return 0;
                         }
                         cout << "----------------------------------------" << endl;
                     }
@@ -127,25 +130,27 @@ class Game
                 {
                     for (auto& iterador: players)
                     {
+                        int turno=i; //get turn number
+                        int diceValue=dice.roll(); //get integer from dice
+                        
                         cout << "----------------------------------------" << endl;
-                        cout << "Turno de " << iterador.getName() << endl;
-                        //no button for dice roll
-                        int diceValue = dice.roll();
-                        cout << "El dado cayo en " << diceValue << endl;
-                        iterador.setPos(iterador.getPos(),diceValue); //Set the position according to the dice
-                        if (iterador.getPos() >= sizeBoard) {iterador.setPos(sizeBoard, 0);}
-                            cout << "Ahora estas en la casilla " << iterador.getPos() << endl;
-                        if (iterador.getPos() >= sizeBoard) //Verify if it wins
-                        {
-                            cout << "Felicidades " << iterador.getName() << " has ganado" << endl;
-                            cout << "\nGAME OVER" << endl;
-                            return 0;
-                        }
+
+                        iterador+diceValue; //Set the position according to the dice
+                        
                         if(b.getBoard()[iterador.getPos()]->getType()=='S' || b.getBoard()[iterador.getPos()]->getType()=='L') //Verify the tile
                         {
-                            cout << "Caiste en: " << b.getBoard()[iterador.getPos()]->getType() << "    te mueves acorde" << endl;
                             iterador+(b.getBoard()[iterador.getPos()]->getMove()); //Give the punishment/reward
-                            cout << "Ahora estas en la casilla " << iterador.getPos() << endl;
+                        }
+                        if (iterador.getPos() >= sizeBoard) {iterador.setPos(sizeBoard, 0);}
+
+                        &ta.reTurno(b,iterador,turno,diceValue);//edit printable turn object
+                        cout << "Turno: " << turno << endl;//print said object
+                        
+                        if (iterador.getPos() >= sizeBoard) //Verify if it wins
+                        {
+                            cout << "Player " << iterador.getName() << " is the winner" << endl;
+                            cout << "\nGAME OVER" << endl;
+                            return 0;
                         }
                         cout << "----------------------------------------" << endl;
                     }

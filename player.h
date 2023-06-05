@@ -12,7 +12,7 @@ using namespace std;
 
 class Player : public Person
 {
-    int posPlayer = 0;
+    int posPlayer = 1;
     public:
         Player() : Person () {} //Emty constructor
         Player(const string &name) : Person(name) {} //Constructor with name as input
