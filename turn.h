@@ -28,9 +28,7 @@ class Turn
 
     public:
         Turn(){}//Empty constructor
-       // Turn(int turnNum,  Player p, Board b, int diceValue)
-        //    : turnNum(turnNum), namePlayer(p.getName()), orgPos(p.getPos()), diceValue(diceValue), type(b.getBoard()[p.getPos()]->getType()) {}
-
+        ~Turn(){}
 
         const int getTurn(){return turnNum;}//Get the turn
         const string getName(){return namePlayer;}//Get the name of the player
