@@ -96,12 +96,14 @@ class Game
                     {   
                         int turno=i; //get turn number
                         int diceValue=dice.roll(); //get integer from dice
+                        int posicionorg=iterador.getPos(); //get original position
                         
                         cout << "----------------------------------------" << endl;
                         cout << "Presiona enter para lanzar el dado" << endl;
                         cin.get();
 
                         iterador+diceValue; //Set the position according to the dice
+                        int posicionorg=iterador.getPos(); //get original position
 
                         if(b.getBoard()[iterador.getPos()]->getType()=='S' || b.getBoard()[iterador.getPos()]->getType()=='L') //Verify the tile
                         {
@@ -109,7 +111,7 @@ class Game
                         }
                         if (iterador.getPos() >= sizeBoard) {iterador.setPos(sizeBoard, 0);}
 
-                        tm.reTurno(b,iterador,turno,diceValue);//edit printable turn object
+                        tm.reTurno(b,iterador,turno,diceValue,);//edit printable turn object
                         cout << "Turno: " << turno << endl;
                         
                         if (iterador.getPos() >= sizeBoard) //Verify if it wins
