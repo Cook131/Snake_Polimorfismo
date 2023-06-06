@@ -89,7 +89,7 @@ class Game
             if(gamemode=='M')
             {
                 //Turn loop
-                for (int i = 0; i < maxTurns; i++)
+                for (int i = 1; i < maxTurns+1; i++)
                 {
                     //Player loop
                     for (auto& iterador: players)
@@ -127,7 +127,7 @@ class Game
             //Automatic mode
             else if(gamemode=='A')
             {
-                for (int i = 0; i < maxTurns; i++)
+                for (int i = 1; i < maxTurns+1; i++)
                 {
                     for (auto& iterador: players)
                     {
