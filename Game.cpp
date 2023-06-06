@@ -111,7 +111,7 @@ class Game
                         }
                         if (iterador.getPos() >= sizeBoard) {iterador.setPos(sizeBoard, 0);}
 
-                        tm.reTurno(b,iterador,turno,diceValue,);//edit printable turn object
+                        tm.reTurno(b,iterador,turno,diceValue,posicionorg);//edit printable turn object
                         cout << "Turno: " << turno << endl;
                         
                         if (iterador.getPos() >= sizeBoard) //Verify if it wins
@@ -138,6 +138,8 @@ class Game
                         cout << "----------------------------------------" << endl;
 
                         iterador+diceValue; //Set the position according to the dice
+                        int posicionorg=iterador.getPos(); //get original position
+
                         
                         if(b.getBoard()[iterador.getPos()]->getType()=='S' || b.getBoard()[iterador.getPos()]->getType()=='L') //Verify the tile
                         {
@@ -145,7 +147,7 @@ class Game
                         }
                         if (iterador.getPos() >= sizeBoard) {iterador.setPos(sizeBoard, 0);}
 
-                        ta.reTurno(b,iterador,turno,diceValue);//edit printable turn object
+                        ta.reTurno(b,iterador,turno,diceValue,posicionorg);//edit printable turn object
                         cout << "Turno: " << turno << endl;//print said object
                         
                         if (iterador.getPos() >= sizeBoard) //Verify if it wins
