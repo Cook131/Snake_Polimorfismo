@@ -21,7 +21,7 @@ class Player : public Person
         void setPos(int pos, int dice){ posPlayer = pos + dice; }  //sets new position based on past position and dice adding
         int getPos(){ return posPlayer; } //gets 
         void printPlayerInfo(); //prints at end of turn the data collected by individual
-        void operator+(int dice){ posPlayer= posPlayer + dice; } //overload operator to add dice to position
+        void operator+(int dice){ posPlayer = getPos() + dice; } //overload operator to add dice to position
 };
 
 void Player::printPlayerInfo() //Print player attributes
