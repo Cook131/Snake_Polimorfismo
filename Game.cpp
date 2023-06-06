@@ -58,7 +58,6 @@ class Game
             //Create the board according to the paramaters
             
             b.setSize(sizeBoard);
-
             b.setRandomTiles(numSnakes, numLadders, -1*Smove, Lmove);
             cout << "TABLERO: " << endl;
             b.printBoard();
@@ -101,15 +100,15 @@ class Game
                         int diceValue = dice.roll(); //get integer from dice
                         iterador + diceValue; //Set the position according to the dice
                         int lastPos = iterador.getPos();
-                        char type = b.getBoard()[iterador.getPos()]->getType();
-
+                        if (lastPos >= sizeBoard) {iterador.setPos(sizeBoard, 0); lastPos = sizeBoard;}
+                        char type = b.getBoard()[lastPos - 1]->getType();
                         if( type =='S' || type =='L') //Verify the tile
                         {
-                            iterador + (b.getBoard()[iterador.getPos()]->getMove()); //Give the punishment/reward
+                            iterador + b.getBoard()[lastPos - 1]->getMove(); //Give the punishment/reward
+                            lastPos = iterador.getPos();
                         }
-                        if (lastPos >= sizeBoard) {iterador.setPos(sizeBoard, 0);}
-                        tm.setTurn(i, iterador.getName(), orgPos, diceValue, type, lastPos);
-                        cout << tm;
+                        ta.setTurn(i, iterador.getName(), orgPos, diceValue, type, lastPos);
+                        cout << ta;
                         if (lastPos >= sizeBoard) //Verify if it wins
                         {
                             cout << "Player " << iterador.getName() << " is the winner" << endl;
@@ -132,13 +131,13 @@ class Game
                         int diceValue = dice.roll(); //get integer from dice
                         iterador + diceValue; //Set the position according to the dice
                         int lastPos = iterador.getPos();
-                        char type = b.getBoard()[iterador.getPos()]->getType();
-
+                        if (lastPos >= sizeBoard) {iterador.setPos(sizeBoard, 0); lastPos = sizeBoard;}
+                        char type = b.getBoard()[lastPos - 1]->getType();
                         if( type =='S' || type =='L') //Verify the tile
                         {
-                            iterador + (b.getBoard()[iterador.getPos()]->getMove()); //Give the punishment/reward
+                            iterador + b.getBoard()[lastPos - 1]->getMove(); //Give the punishment/reward
+                            lastPos = iterador.getPos();
                         }
-                        if (lastPos >= sizeBoard) {iterador.setPos(sizeBoard, 0);}
                         ta.setTurn(i, iterador.getName(), orgPos, diceValue, type, lastPos);
                         cout << ta;
                         if (lastPos >= sizeBoard) //Verify if it wins
