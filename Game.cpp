@@ -94,32 +94,29 @@ class Game
                     //Player loop
                     for (auto& iterador: players)
                     {   
-                        int turno=i; //get turn number
-                        int diceValue=dice.roll(); //get integer from dice
                         
-                        cout << "----------------------------------------" << endl;
                         cout << "Presiona enter para lanzar el dado" << endl;
+                        int orgPos = iterador.getPos(); //get original position
                         cin.get();
+                        int diceValue = dice.roll(); //get integer from dice
+                        iterador + diceValue; //Set the position according to the dice
+                        int lastPos = iterador.getPos();
+                        char type = b.getBoard()[iterador.getPos()]->getType();
 
-                        iterador+diceValue; //Set the position according to the dice
-                        int posicionorgm=iterador.getPos(); //get original position
-
-                        if(b.getBoard()[iterador.getPos()]->getType()=='S' || b.getBoard()[iterador.getPos()]->getType()=='L') //Verify the tile
+                        if( type =='S' || type =='L') //Verify the tile
                         {
-                            iterador+(b.getBoard()[iterador.getPos()]->getMove()); //Give the punishment/reward
+                            iterador + (b.getBoard()[iterador.getPos()]->getMove()); //Give the punishment/reward
                         }
-                        if (iterador.getPos() >= sizeBoard) {iterador.setPos(sizeBoard, 0);}
-
-                        tm.reTurno(b,iterador,turno,diceValue,posicionorgm);//edit printable turn object
-                        cout << "Turno: " << turno << endl;
-                        
-                        if (iterador.getPos() >= sizeBoard) //Verify if it wins
+                        if (lastPos >= sizeBoard) {iterador.setPos(sizeBoard, 0);}
+                        tm.setTurn(i, iterador.getName(), orgPos, diceValue, type, lastPos);
+                        cout << tm;
+                        if (lastPos >= sizeBoard) //Verify if it wins
                         {
                             cout << "Player " << iterador.getName() << " is the winner" << endl;
                             cout << "\nGAME OVER" << endl;
                             return 0;
                         }
-                        cout << "----------------------------------------" << endl;
+
                     }
                 }
                 cout << "Turnos maximos" << "\nGAME OVER" << endl;
@@ -131,31 +128,25 @@ class Game
                 {
                     for (auto& iterador: players)
                     {
-                        int turno=i; //get turn number
-                        int diceValue=dice.roll(); //get integer from dice
-                        
-                        cout << "----------------------------------------" << endl;
+                        int orgPos = iterador.getPos(); //get original position
+                        int diceValue = dice.roll(); //get integer from dice
+                        iterador + diceValue; //Set the position according to the dice
+                        int lastPos = iterador.getPos();
+                        char type = b.getBoard()[iterador.getPos()]->getType();
 
-                        iterador+diceValue; //Set the position according to the dice
-                        int posicionorga=iterador.getPos(); //get original position
-
-                        
-                        if(b.getBoard()[iterador.getPos()]->getType()=='S' || b.getBoard()[iterador.getPos()]->getType()=='L') //Verify the tile
+                        if( type =='S' || type =='L') //Verify the tile
                         {
-                            iterador+(b.getBoard()[iterador.getPos()]->getMove()); //Give the punishment/reward
+                            iterador + (b.getBoard()[iterador.getPos()]->getMove()); //Give the punishment/reward
                         }
-                        if (iterador.getPos() >= sizeBoard) {iterador.setPos(sizeBoard, 0);}
-
-                        ta.reTurno(b,iterador,turno,diceValue,posicionorga);//edit printable turn object
-                        cout << "Turno: " << turno << endl;//print said object
-                        
-                        if (iterador.getPos() >= sizeBoard) //Verify if it wins
+                        if (lastPos >= sizeBoard) {iterador.setPos(sizeBoard, 0);}
+                        ta.setTurn(i, iterador.getName(), orgPos, diceValue, type, lastPos);
+                        cout << ta;
+                        if (lastPos >= sizeBoard) //Verify if it wins
                         {
                             cout << "Player " << iterador.getName() << " is the winner" << endl;
                             cout << "\nGAME OVER" << endl;
                             return 0;
                         }
-                        cout << "----------------------------------------" << endl;
                     }
                 }
                 //game over if max turns

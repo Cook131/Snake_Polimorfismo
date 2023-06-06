@@ -19,40 +19,46 @@ class Turn
 {
     private:        
         //Create the game objects
-        Board b;
-        Player iterador;
-        Dice dice;
-        int turnnum;
+        int turnNum;
+        string namePlayer;
+        int orgPos;
         int diceValue;
-        int posicionorg;
+        char type;
+        int lastPos;
 
     public:
         Turn(){}//Empty constructor
-        const string getNombre(){return iterador.getName();}//Get the name of the player
-        const int getPos(){return iterador.getPos();}//Get the position of the player
-        const char getType(){return b.getBoard()[iterador.getPos()]->getType();}//Get the type of the tile
-        const int getMove(){return b.getBoard()[iterador.getPos()]->getMove();}//Get the movement of the tile
-        const int getTurno(){return turnnum;}//Get the turn
-        const int getDiceValue(){return diceValue;}//Get the dice value
-        const int getPosicionorg(){return posicionorg;}//Get the original position
+       // Turn(int turnNum,  Player p, Board b, int diceValue)
+        //    : turnNum(turnNum), namePlayer(p.getName()), orgPos(p.getPos()), diceValue(diceValue), type(b.getBoard()[p.getPos()]->getType()) {}
 
 
-        void reTurno(Board &b,Player &iterador,int &turnnum,int &diceValue, int &posicionorg);//Change the turn values
+        const int getTurn(){return turnNum;}//Get the turn
+        const string getName(){return namePlayer;}//Get the name of the player
+        const int getOrgPos(){return orgPos;}//Get the position of the player
+        const int getDiceValue(){ return diceValue;}
+        const char getType(){return type;}//Get the type of the tile
+        const int getLastPos(){return lastPos;}//Get the original position
+
+
+        void setTurn(int, string, int, int, char, int);//Change the turn values
 
         ~Turn(){}//Destructor
 };
 
-ostream & operator<<(ostream &out, Turn &t) //print overload
+ostream & operator<<(ostream &out,  Turn &t) //print overload
 {   
-    cout<< t.getTurno() << " " << t.getNombre() << " " << t.getPos() << " " << t.getType() << " " << t.getPosicionorg() << endl;
+    out <<  t.getTurn() << " " << t.getName() << " " << t.getOrgPos()  << " " << t.getDiceValue() << " " << t.getType() << " " << t.getLastPos() << endl;
+    out << "----------------------------------------" << endl;
     return out;
 }
 
-void Turn::reTurno(Board &b,Player &iterador,int &turnnum,int &diceValue,int &posicionorg) //edit the Turno values for each turn
+void Turn::setTurn(int turnNum, string playerName, int orgPos, int diceValue, char type, int lastPos) //edit the Turno values for each turn
 {
-    this->b=b;
-    this->iterador=iterador;
-    this->turnnum=turnnum;
-    this->diceValue=diceValue;
-    this->posicionorg=posicionorg;
+    this -> turnNum = turnNum;
+    this -> namePlayer = playerName;
+    this -> orgPos = orgPos;
+    this -> diceValue = diceValue;
+    this -> type = type;
+    this -> lastPos = lastPos;
+
 }
