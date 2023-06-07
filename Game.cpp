@@ -42,7 +42,7 @@ class Game
             cout << "Ingrese el numero de turnos antes de que acabe el juego: " << endl;
             cin >> maxTurns;
 
-            cout << "Ingrese el numero de tamaño del tablero: " << endl;
+            cout << "Ingrese el numero de tamanio del tablero: " << endl;
             cin >> sizeBoard;
 
             cout << "Ingrese el numero de escaleras que desea en el juego\n(mientras mas pongas, mas posibilidades de que salgan): " << endl;
