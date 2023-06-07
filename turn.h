@@ -28,6 +28,7 @@ class Turn
 
     public:
         Turn(){}//Empty constructor
+        ~Turn(){}//Destructor
 
         const int getTurn(){return turnNum;}//Get the turn
         const string getName(){return namePlayer;}//Get the name of the player
@@ -36,10 +37,7 @@ class Turn
         const char getType(){return type;}//Get the type of the tile
         const int getLastPos(){return lastPos;}//Get the original position
 
-
-        void setTurn(int, string, int, int, char, int);//Change the turn values
-
-        ~Turn(){}//Destructor
+        void setTurn(const int &, const string &, const int &, const int &, const char &, const int &);//Set all turn values
 };
 
 ostream & operator<<(ostream &out,  Turn &t) //print overload
@@ -49,7 +47,7 @@ ostream & operator<<(ostream &out,  Turn &t) //print overload
     return out;
 }
 
-void Turn::setTurn(int turnNum, string playerName, int orgPos, int diceValue, char type, int lastPos) //edit the Turno values for each turn
+void Turn::setTurn(const int &turnNum,const string &playerName, const int &orgPos, const int &diceValue, const char &type, const int &lastPos) //edit the Turno values for each turn
 {
     this -> turnNum = turnNum;
     this -> namePlayer = playerName;

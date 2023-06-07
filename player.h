@@ -18,10 +18,10 @@ class Player : public Person
         Player(const string &name) : Person(name) {} //Constructor with name as input
         ~Player() {} //Destructor
         
-        void setPos(int pos, int dice){ posPlayer = pos + dice; }  //sets new position based on past position and dice adding
+        void setPos(const int &pos, const int &dice){ posPlayer = pos + dice; }  //sets new position based on past position and dice adding
         int getPos(){ return posPlayer; } //gets 
         void printPlayerInfo(); //prints at end of turn the data collected by individual
-        void operator+(int dice){ posPlayer = getPos() + dice; } //overload operator to add dice to position
+        void operator+(const int &dice){ posPlayer = getPos() + dice; } //overload operator to add dice to position
 };
 
 void Player::printPlayerInfo() //Print player attributes

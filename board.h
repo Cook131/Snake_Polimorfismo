@@ -26,7 +26,7 @@ class Board
         Board(const Board &other) : sizeBoard(other.sizeBoard), board(other.board), randomEngine(random_device{}()){} //Copy constructor
         ~Board(){} //Destructor
 
-    void setSize(int sizeBoard); //methpd to change size of the board and creat a tile vector of said size
+    void setSize(const int &); //methpd to change size of the board and creat a tile vector of said size
     const int getSize(){ return sizeBoard; }
     const vector<Tile*> getBoard(){ return board; }
     void setRandomTiles(int, int, int, int); //Method to create and set the snakes and ladders in random positions
@@ -51,7 +51,7 @@ Board::Board(const int &sizeBoard) : sizeBoard(sizeBoard), board(sizeBoard)
 }
 
 
-void Board::setSize(int sizeBoard) 
+void Board::setSize(const int &sizeBoard) 
 {
     this -> sizeBoard = sizeBoard; 
         board.resize(sizeBoard);  
