@@ -45,7 +45,7 @@ class Turn
 ostream & operator<<(ostream &out,  Turn &t) //print overload
 {   
     out <<  t.getTurn() << " " << t.getName() << " " << t.getOrgPos()  << " " << t.getDiceValue() << " " << t.getType() << " " << t.getLastPos() << endl;
-    out << "----------------------------------------" << endl;
+    out << "----------------------" << endl;
     return out;
 }
 
