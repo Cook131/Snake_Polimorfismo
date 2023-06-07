@@ -28,7 +28,6 @@ class Turn
 
     public:
         Turn(){}//Empty constructor
-        ~Turn(){}
 
         const int getTurn(){return turnNum;}//Get the turn
         const string getName(){return namePlayer;}//Get the name of the player
